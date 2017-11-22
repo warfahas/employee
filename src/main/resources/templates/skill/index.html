@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+
+
+<p th:unless="${skills} and ${skills.size()}">No Skills.</p>
+
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+
+    <tr th:each="skill : ${skills}">
+        <td th:text="${skill.name}"></td>
+        <td th:text="${skill.description}"></td>
+    </tr>
+
+</table>
+
+<a href="/skill/add">Add Skill</a> |
+<a href="/skill/remove">Delete Skill</a>
+
+</body>
+</html>

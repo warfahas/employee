@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+<p th:unless="${form.employee.skills} and ${form.employee.skills.size()}">No Skills</p>
+
+<form method="post" style="max-width:600px;" th:object="${form}">
+
+    <div th:each="skill : ${form.employee.skills}" class="checkbox">
+        <input type="checkbox" name="skillIds" th:value="${skill.id}" th:id="${skill.id}"/>
+        <label th:for="${skill.id}" th:text="${form.employee.firstName + ' ' + form.employee.lastName + ' - ' + skill.name}"></label>
+        <br />
+    </div>
+    <input type="hidden" name="employeeId" th:value="*{employee.id}" />
+    <input type="submit" value="Remove Employee and Skill" />
+</form>
+
+</body>
+</html>

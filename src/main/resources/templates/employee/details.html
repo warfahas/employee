@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+<p th:unless="${employee.skills} and ${employee.skills.size()}">No Skills</p>
+<table class="table">
+
+    <tr>
+        <th>Skills</th>
+
+    </tr>
+
+    <tr th:each="skill : ${employee.skills}">
+        <td th:text="${skill.name}"></td>
+
+    </tr>
+
+</table>
+<a th:href="'/employee/add-item/' + ${employee.id}">Add Skill</a> | <a th:href="'/employee/delete-item/' + ${employee.id}">Delete Employee and Skill</a>
+
+
+
+
+
+
+</body>
+</html>
