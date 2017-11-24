@@ -15,7 +15,7 @@ import java.util.*;
  * Created by mkabd on 7/8/2017.
  */
 @Entity
-public class Employee implements Comparable<Employee> {
+public class Employee {
 
     @Id
     @GeneratedValue
@@ -93,12 +93,5 @@ public class Employee implements Comparable<Employee> {
     public void deleteItem(Skill item) {
         skills.remove(item);
     }
-    @Override
-    public int compareTo(Employee employee) {
-        int compare = lastName.compareTo(employee.lastName);
-        if (compare == 0) {
-            compare = firstName.compareTo(employee.firstName);
-        }
-        return compare;
-    }
+
 }
