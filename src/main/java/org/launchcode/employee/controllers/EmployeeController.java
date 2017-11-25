@@ -7,18 +7,12 @@ import org.launchcode.employee.models.data.SkillDao;
 import org.launchcode.employee.models.forms.AddSkillForm;
 import org.launchcode.employee.models.forms.DeleteSkillForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by mkabd on 7/8/2017.
@@ -172,6 +166,7 @@ public class EmployeeController {
         model.addAttribute("title", "Update Employee");
         model.addAttribute(new Employee());
 
+
         return "employee/update";
     }
 
@@ -181,11 +176,14 @@ public class EmployeeController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Update Employees");
+
             return "employee/update";
         }
 
 
+
         employeeDao.save(employee);
+
 
 
         return "redirect:/employee/details/" + employee.getId();
