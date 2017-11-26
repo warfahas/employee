@@ -20,13 +20,13 @@ messages when the user enters incorrect data.
 
 Here are three wireframes of what the app will look like.
 
-* ![Add Employee Wireframe](/employee/addemployee.pdf)
+* ![Add Employee Wireframe](/addemployee.pdf)
 
 
-* ![Add Skill Wireframe](/employee/addskill.pdf)
+* ![Add Skill Wireframe](/addskill.pdf)
 
 
-* ![Employees Wireframe](/employee/employees.pdf)
+* ![Employees Wireframe](/employees.pdf)
 
 
 
