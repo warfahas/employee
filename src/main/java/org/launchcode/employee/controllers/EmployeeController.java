@@ -7,6 +7,7 @@ import org.launchcode.employee.models.data.SkillDao;
 import org.launchcode.employee.models.forms.AddSkillForm;
 import org.launchcode.employee.models.forms.DeleteSkillForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -29,8 +30,8 @@ public class EmployeeController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
-
-        model.addAttribute("employees", employeeDao.findAll());
+        Sort mySort = new Sort(Sort.Direction.ASC, "lastName");
+        model.addAttribute("employees", employeeDao.findAll(mySort));
         model.addAttribute("title", "Employees");
 
 

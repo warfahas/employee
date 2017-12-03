@@ -15,7 +15,4 @@ import java.util.List;
 public interface SkillDao extends CrudRepository<Skill, Integer> {
 
 
-
-
-
 }

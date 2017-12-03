@@ -1,10 +1,10 @@
 package org.launchcode.employee.models.data;
 
-import org.hibernate.criterion.Order;
 import org.launchcode.employee.models.Employee;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -15,8 +15,7 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public interface EmployeeDao extends CrudRepository<Employee, Integer> {
-
+public interface EmployeeDao extends PagingAndSortingRepository<Employee, Integer> {
 
 
 
