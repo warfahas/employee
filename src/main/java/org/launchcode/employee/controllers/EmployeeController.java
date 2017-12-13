@@ -163,9 +163,10 @@ public class EmployeeController {
         Employee employee = employeeDao.findOne(id);
 
 
+        model.addAttribute("employee", employee);
 
         model.addAttribute("title", "Update Employee");
-        model.addAttribute(new Employee());
+
 
 
         return "employee/update";
@@ -180,10 +181,14 @@ public class EmployeeController {
 
             return "employee/update";
         }
+        Employee presentEmployee = employeeDao.findOne(id);
+        presentEmployee.setFirstName(employee.getFirstName());
+        presentEmployee.setLastName(employee.getLastName());
+        presentEmployee.setEmail(employee.getEmail());
 
 
 
-        employeeDao.save(employee);
+        employeeDao.save(presentEmployee);
 
 
 
