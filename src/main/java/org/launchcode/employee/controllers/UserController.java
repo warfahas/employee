@@ -18,12 +18,47 @@ import javax.validation.Valid;
 @RequestMapping("user")
 public class UserController {
 
-    @RequestMapping(value = "/user/add", method = RequestMethod.GET)
-    public String showRegistrationForm(WebRequest request, Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "add";
+    @Autowired
+    private UserDao userDao;
+
+    @RequestMapping(value = "")
+    public String index(Model model) {
+
+
+
+        model.addAttribute(new User());
+        model.addAttribute("title", "Users");
+
+        return "user/index";
     }
+
+    @RequestMapping(value = "add", method = RequestMethod.GET)
+    public String add(Model model) {
+
+        model.addAttribute(new User());
+        model.addAttribute("title", "Register");
+        return "user/add";
+    }
+
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String add(Model model, @ModelAttribute @Valid User user, Errors errors) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute(new User());
+            model.addAttribute("title", "Add User");
+
+            return "user/add";
+        }
+
+        userDao.save(user);
+
+        return "redirect:";
+
+
+    }
+
+
+
 
 
 
