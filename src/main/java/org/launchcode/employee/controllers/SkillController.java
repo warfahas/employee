@@ -68,15 +68,26 @@ public class SkillController {
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveSkillForm(@RequestParam int[] skillIds) {
-
-        for (int skillId : skillIds) {
-            skillDao.delete(skillId);
+    public String processRemoveSkillForm(Model model, @RequestParam(value="skillIds", required=false) int[] skillIds) {
+        if(skillIds == null) {
+            model.addAttribute("skills", skillDao.findAll());
+            model.addAttribute("title", "Remove Skill");
+            return "skill/remove";
+        }else {
+            for (int skillId : skillIds) {
+              skillDao.delete(skillId);
+            }
+            return "redirect:";
         }
+        //for (int skillId : skillIds) {
+          //  skillDao.delete(skillId);
+        //}
 
 
-        return "redirect:";
+        //return "redirect:";
+
     }
+
 
 
 

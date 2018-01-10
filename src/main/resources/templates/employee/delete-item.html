@@ -11,11 +11,19 @@
 
 <form method="post" style="max-width:600px;" th:object="${form}">
 
-    <div th:each="skill : ${form.employee.skills}" class="checkbox">
-        <input type="checkbox" name="skillIds" th:value="${skill.id}" th:id="${skill.id}"/>
-        <label th:for="${skill.id}" th:text="${form.employee.firstName + ' ' + form.employee.lastName + ' - ' + skill.name}"></label>
-        <br />
-    </div>
+    <table class="table">
+
+        <tr>
+            <th>Skill Name</th>
+
+        </tr>
+
+        <tr th:each="skill : ${form.employee.skills}">
+            <td th:text="${skill.name}"></td>
+
+        </tr>
+
+    </table>
     <input type="hidden" name="employeeId" th:value="*{employee.id}" />
     <input class="button" type="submit" value="Remove Employee and Skill" />
 </form>

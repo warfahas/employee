@@ -12,24 +12,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class SmsService {
 
-    @Value("${account-sid}")
-    public static String ACCOUNT_SID;
-    @Value("${account-token}")
-    public static String AUTH_TOKEN;
+
     @Value("${account-num}")
-    public static String account;
+    public String account;
     @Value("${account-num}")
-    public static String number;
+    public String number;
 
 
-    public SmsService() {
+    public SmsService( @Value("${account-sid}") String ACCOUNT_SID, @Value("${account-token}") String AUTH_TOKEN) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     }
 
     public void sendSms(String message, String number) {
-        Message msg = Message.creator(new PhoneNumber("account-num"),
-                new PhoneNumber("receiver"),
-                "This is the ship that made the Kessel Run in fourteen parsecs?").create();
+        Message msg = Message.creator(new PhoneNumber(number),
+                new PhoneNumber(account),
+                message).create();
 
         System.out.println(msg.getSid());
     }

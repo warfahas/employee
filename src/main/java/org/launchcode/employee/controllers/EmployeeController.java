@@ -1,7 +1,9 @@
 package org.launchcode.employee.controllers;
 
 import org.launchcode.employee.models.Employee;
+import org.launchcode.employee.models.Message;
 import org.launchcode.employee.models.Skill;
+import org.launchcode.employee.models.SmsService;
 import org.launchcode.employee.models.data.EmployeeDao;
 import org.launchcode.employee.models.data.SkillDao;
 import org.launchcode.employee.models.forms.AddSkillForm;
@@ -27,6 +29,9 @@ public class EmployeeController {
 
     @Autowired
     private SkillDao skillDao;
+
+    @Autowired
+    private SmsService smsService;
 
     @RequestMapping(value = "")
     public String index(Model model) {
@@ -133,8 +138,8 @@ public class EmployeeController {
 
     @RequestMapping(value = "delete-item/{id}", method = RequestMethod.POST)
     public String deleteItem(Model model, @ModelAttribute @Valid DeleteSkillForm form,
-                          Errors errors, @PathVariable int id, @RequestParam int[] skillIds) {
-        if (errors.hasErrors()) {
+                          Errors errors, @PathVariable int id, @RequestParam(value="skillIds", required=false) int[] skillIds) {
+        if (skillIds != null) {
             Employee employee = employeeDao.findOne(id);
 
             model.addAttribute("title", "Delete employee and skill from employee list: " + employee.getFirstName() + employee.getLastName());
@@ -197,6 +202,35 @@ public class EmployeeController {
 
 
     }
+
+    @RequestMapping(value = "send-message", method = RequestMethod.GET)
+    public String sendMessage(Model model) {
+        model.addAttribute("message",new Message());
+        model.addAttribute("title", "Send Message");
+
+
+
+
+        return "employee/send-message";
+    }
+    @RequestMapping(value = "send-message", method = RequestMethod.POST)
+    public String sendMessage(Model model, @ModelAttribute @Valid Message message, Errors errors) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Send Message");
+
+            return "employee/send-message";
+        }
+
+        smsService.sendSms(message.getMessage(), message.getNumber());
+
+
+
+
+        return "redirect:/employee/";
+    }
+
+
 
 
 

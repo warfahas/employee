@@ -1,37 +1,48 @@
 package org.launchcode.employee.models;
 
-import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  * Created by mkabd on 7/8/2017.
  */
+@Entity
 public class User {
-    @NotNull
-    @Size(min =5, max = 15)
-    private String username;
 
-    @Email
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @NotNull
+    @NotEmpty
+    private String firstName;
+
+    @NotNull
+    @NotEmpty
+    private String lastName;
+
+    @NotNull
+    @NotEmpty
+    private String password;
+    private String matchingPassword;
+
+    @NotNull
+    @NotEmpty
     private String email;
 
-    @NotNull
-    @Size(min = 6, max = 15)
-    private String password;
-
-    @NotNull
-    @Size(min = 6, max = 15)
-    private String verify;
 
 
+    public User(String firstName, String lastName, String password, String matchingPassword, String email) {
 
-
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
-        this.verify = verify;
+        this.matchingPassword = matchingPassword;
+        this.email = email;
+
+
 
 
     }
@@ -40,20 +51,28 @@ public class User {
 
     }
 
-    public String getUsername() {
-        return username;
+    public int getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -64,12 +83,20 @@ public class User {
         this.password = password;
     }
 
-    public String getVerify() {
-        return verify;
+    public String getMatchingPassword() {
+        return matchingPassword;
     }
 
-    public void setVerify(String verify) {
-        this.verify = verify;
+    public void setMatchingPassword(String matchingPassword) {
+        this.matchingPassword = matchingPassword;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
 
