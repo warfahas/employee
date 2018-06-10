@@ -14,7 +14,7 @@ public class EmployeeApplicationTests {
 public SmsService smsService;
 	@Test
 	public void contextLoads() {
-		smsService.sendSms("Hi", "+13145027073");
+		smsService.sendSms("Hi", "+1");
 	}
 
 }

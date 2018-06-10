@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/assets/**", "/webjars/**", "/user/**", "/employee").permitAll()
+                .antMatchers("/", "/assets/**", "/webjars/**", "/user/**", "/employee/**", "/skill/**").permitAll()
                 //.antMatchers("/user/{userId}").access("@authz.check(principal)")
                 .mvcMatchers("/admin").denyAll()
                 .anyRequest().authenticated()
