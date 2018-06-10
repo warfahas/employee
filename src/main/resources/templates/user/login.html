@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <h1 th:text="${title}">Default Title</h1>
@@ -7,19 +7,12 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <form method="post" style="max-width:600px;" th:action="@{/login}">
-    <div class="form-group">
-        <label th:for="username">Username</label>
-        <input class="form-control" th:field="*{username}"/>
-        <span th:errors="*{username}"></span>
-    </div>
+    <label for="username">Username</label>:
+    <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
+    <label for="password">Password</label>:
+    <input type="password" id="password" name="password" /> <br />
 
-    <div class="from-group">
-        <label th:for="password">Password</label>
-        <input class="form-control" th:field="*{password}" type="password"/>
-        <span th:errors="*{password}"></span>
-    </div>
-
-    <input class="button" type="submit" value="Log in" />
+    <input class="button" type="submit" value="Login" />
 </form>
 
 </body>

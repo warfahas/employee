@@ -1,61 +1,71 @@
 package org.launchcode.employee.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by mkabd on 7/8/2017.
  */
 @Entity
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
 
     @NotNull
-    @NotEmpty
+    @Size(min =5, max = 15)
     private String firstName;
 
     @NotNull
-    @NotEmpty
+    @Size(min =5, max = 15)
     private String lastName;
 
-    @NotNull
-    @NotEmpty
-    private String password;
-    private String matchingPassword;
-
-    @NotNull
-    @NotEmpty
+    @Email
+    @Pattern(regexp=".+@.+\\.[a-z]+", message="Invalid email address!")
     private String email;
 
+    @NotNull
+    @Size(min = 6, max = 15)
+    private String password;
 
-
-    public User(String firstName, String lastName, String password, String matchingPassword, String email) {
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.matchingPassword = matchingPassword;
-        this.email = email;
-
-
-
-
-    }
 
     public User() {
-
     }
 
-    public int getId() {
+    public User(User user) {
+        this.id = user.id;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.email = user.email;
+        this.password = user.password;
+    }
+
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,22 +85,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getMatchingPassword() {
-        return matchingPassword;
-    }
-
-    public void setMatchingPassword(String matchingPassword) {
-        this.matchingPassword = matchingPassword;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -98,5 +92,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    private static final long serialVersionUID = 2738859149330833739L;
 }
 
